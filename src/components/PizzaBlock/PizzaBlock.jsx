@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import pizzaBlockImg from "../../assets/img/pizza.jpg";
 
 function PizzaBlock({ title, price }) {
   const [pizzaCount, setPizzaCount] = useState(0);
 
   return (
     <div className="pizza-block">
-      <img className="pizza-block__image" src="./pizza.jpg" alt="Pizza" />
+      <img className="pizza-block__image" src={pizzaBlockImg} alt="Pizza" />
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
