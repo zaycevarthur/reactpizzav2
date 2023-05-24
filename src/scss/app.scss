@@ -52,6 +52,8 @@ body {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 11px;
+    
+      
 
     @media (max-width: 1400px) {
       grid-template-columns: repeat(3, 1fr);
@@ -62,7 +64,7 @@ body {
     }
 
     @media (max-width: 730px) {
-      grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: repeat(1, 1fr); 
     }
   }
 
@@ -76,9 +78,9 @@ body {
         width: 100%;
         overflow: auto;
 
-        ul {
-          width: 785px;
-        }
+        // ul {
+        //   width: 785px;
+        // }
       }
 
       .sort {
