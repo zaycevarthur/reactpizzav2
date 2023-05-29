@@ -1,4 +1,8 @@
 import React, { createContext, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { decrement, increment } from "./redux/slices/filterSlice";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 import "./scss/app.scss";
 import Header from "./components/Header";
