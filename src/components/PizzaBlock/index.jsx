@@ -31,7 +31,7 @@ function PizzaBlock({
       price,
       imageUrl,
       type: typesNames[activeType],
-      size: activeSize,
+      size: sizes[activeSize],
     };
     dispatch(addItem(item));
   };
