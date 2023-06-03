@@ -8,11 +8,15 @@ const initialState = {
 
 export const fetchPizzas = createAsyncThunk(
   "pizza/fetchPizzas",
-  async ({ currentPage, category, sortBy, orderBy }) => {
+  async ({ currentPage, category, sortBy, orderBy }, thunkApi) => {
     const { data } = await axios.get(
       `https://646c8c187b42c06c3b2b7bcd.mockapi.io/items?limit=4&page=${currentPage}&${category}&sortby=${sortBy}&order=${orderBy}`
     );
-    return data;
+
+    if (data.length === 0)
+      return thunkApi.rejectWithValue(`we'd not recived items`);
+
+    return thunkApi.fulfillWithValue(data);
   }
 );
 
