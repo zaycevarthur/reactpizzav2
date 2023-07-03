@@ -6,9 +6,10 @@ import Search from "../Search";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../redux/slices/cartSlice";
 
-function Header() {
+
+const Header = () => {
   const { totalPrice, items } = useSelector(selectCart);
-  const totalItems = items.reduce((sum, obj) => obj.count + sum, 0);
+  const totalItems = items.reduce((sum :number, obj: any) => obj.count + sum, 0);
   const location = useLocation();
 
   return (
@@ -68,3 +69,5 @@ function Header() {
 }
 
 export default Header;
+
+
