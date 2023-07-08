@@ -4,24 +4,24 @@ import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
 import { setSearchValue } from "../../redux/slices/filterSlice";
 
-function Search() {
+const Search: React.FC = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
   const onClickClear = () => {
     setValue("");
     dispatch(setSearchValue(""));
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   const updateSearchValue = useCallback(
-    debounce((str) => {
+    debounce((str: string) => {
       dispatch(setSearchValue(str));
     }, 750),
     []
   );
 
-  const onChangeValue = (event) => {
+  const onChangeValue = (event: any) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
@@ -61,6 +61,6 @@ function Search() {
       )}
     </div>
   );
-}
+};
 
 export default Search;

@@ -16,7 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { selectPizzaData, setItems } from "../redux/slices/pizzaSlice";
 import { fetchPizzas } from "../redux/slices/pizzaSlice";
 
-function Home() {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
@@ -32,12 +32,19 @@ function Home() {
   const orderBy = sortType.includes("-") ? "asc" : "desc";
   const category = categoryId > 0 ? `category=${categoryId}` : "";
 
-  const onChangePage = (number) => {
+  const onChangeCategory = (id: number) => {
+    dispatch(setCategoryId(id));
+  };
+
+  const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
 
   const getPizzas = () => {
-    dispatch(fetchPizzas({ sortBy, orderBy, category, currentPage }));
+    dispatch(
+      //@ts-ignore
+      fetchPizzas({ sortBy, orderBy, category, currentPage })
+    );
 
     window.scrollTo(0, 0);
   };
@@ -81,13 +88,13 @@ function Home() {
 
   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
   const pizzasBlocks = items
-    .filter((obj) => {
+    .filter((obj: any) => {
       if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return true;
       }
       return false;
     })
-    .map((obj) => (
+    .map((obj: any) => (
       <Link key={obj.id} to={`/pizza/${obj.id}`}>
         <PizzaBlock {...obj} />
       </Link>
@@ -96,10 +103,7 @@ function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          value={categoryId}
-          onClickCategory={(id) => dispatch(setCategoryId(id))}
-        />
+        <Categories value={categoryId} onClickCategory={onChangeCategory} />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
@@ -115,6 +119,6 @@ function Home() {
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
-}
+};
 
 export default Home;

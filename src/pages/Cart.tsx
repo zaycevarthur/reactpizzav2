@@ -5,23 +5,26 @@ import CartItem from "../components/CartItem";
 import { clearItems, selectCart } from "../redux/slices/cartSlice";
 import CartEmpty from "../components/CartEmpty";
 
-function Cart() {
+const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { totalPrice, items } = useSelector(selectCart);
-  const totalItems = items.reduce((sum, obj) => obj.count + sum, 0);
+  const totalItems = items.reduce(
+    (sum: number, obj: any) => obj.count + sum,
+    0
+  );
 
   const onClickClear = () => {
     if (window.confirm("Вы действительно очистить корзину?"))
       dispatch(clearItems());
   };
   return (
-    <div class="container container--cart">
+    <div className="container container--cart">
       {items.length == 0 ? (
         <CartEmpty />
       ) : (
-        <div class="cart">
-          <div class="cart__top">
-            <h2 class="content__title">
+        <div className="cart">
+          <div className="cart__top">
+            <h2 className="content__title">
               <svg
                 width="18"
                 height="18"
@@ -53,7 +56,7 @@ function Cart() {
               </svg>
               Корзина
             </h2>
-            <div onClick={onClickClear} class="cart__clear">
+            <div onClick={onClickClear} className="cart__clear">
               <svg
                 width="20"
                 height="20"
@@ -95,14 +98,14 @@ function Cart() {
             </div>
           </div>
 
-          <div class="content__items">
-            {items.map((item) => (
+          <div className="content__items">
+            {items.map((item: any) => (
               <CartItem key={item.id} {...item} />
             ))}
           </div>
 
-          <div class="cart__bottom">
-            <div class="cart__bottom-details">
+          <div className="cart__bottom">
+            <div className="cart__bottom-details">
               <span>
                 {" "}
                 Всего пицц: <b>{totalItems} шт.</b>{" "}
@@ -112,10 +115,10 @@ function Cart() {
                 Сумма заказа: <b>{totalPrice} ₽</b>{" "}
               </span>
             </div>
-            <div class="cart__bottom-buttons">
+            <div className="cart__bottom-buttons">
               <Link
                 to="/"
-                class="button button--outline button--add go-back-btn"
+                className="button button--outline button--add go-back-btn"
               >
                 <svg
                   width="8"
@@ -135,7 +138,7 @@ function Cart() {
 
                 <span>Вернуться назад</span>
               </Link>
-              <div class="button pay-btn">
+              <div className="button pay-btn">
                 <span>Оплатить сейчас</span>
               </div>
             </div>
@@ -144,6 +147,6 @@ function Cart() {
       )}
     </div>
   );
-}
+};
 
 export default Cart;
