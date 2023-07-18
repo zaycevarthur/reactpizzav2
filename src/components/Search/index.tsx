@@ -8,6 +8,7 @@ const Search: React.FC = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+
   const onClickClear = () => {
     setValue("");
     dispatch(setSearchValue(""));
@@ -21,7 +22,7 @@ const Search: React.FC = () => {
     []
   );
 
-  const onChangeValue = (event: any) => {
+  const onChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
